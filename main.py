@@ -6,6 +6,7 @@ app = FastAPI()
 
 items = ["key","lock", "banana", "cherry","oats","poha"]
 
+#Get operation
 @app.get("/items/{item_id}")
 def read_item(item_id: int):
     if item_id < 0 or item_id >= len(items):
@@ -15,7 +16,7 @@ def read_item(item_id: int):
 @app.get("/items")
 def read_all_items():
     return {"items": items}
-
+#post operation
 @app.post("/items")
 def add_item(item:str):
     items.append(item)
@@ -25,7 +26,7 @@ def add_item(item:str):
 def add_item_byId(item_id:int,item:str):
     items.insert(item_id,item)
     return {"message": "Item added successfully", "items": items}
-
+#delete operation
 @app.delete("/items/{item_id}")
 def delete_item(item_id: int):
     if item_id < 0 or item_id >= len(items):
@@ -39,7 +40,7 @@ def delete_item_byName(item_name: str):
         raise HTTPException(status_code=404, detail="Item not found")
     items.remove(item_name)
     return {"message": f"Item '{item_name}' deleted successfully", "items": items}
-
+# put operation
 @app.put("/items/{item_id}")
 def update_item(item_id: int, item: str):
     if item_id < 0 or item_id >= len(items):
