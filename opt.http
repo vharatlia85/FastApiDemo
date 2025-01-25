@@ -1,8 +1,8 @@
 #POST http://127.0.0.1:8000/items?item=banana
 
-#GET  http://127.0.0.1:8000/items
+GET  http://127.0.0.1:8000/items
 
 #DELETE http://127.0.0.1:8000/items/1
 
-PUT  http://127.0.0.1:8000/items/10?item=cherry
+#PUT  http://127.0.0.1:8000/items/1?item=poha
 
