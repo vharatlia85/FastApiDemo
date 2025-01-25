@@ -40,6 +40,6 @@ jobs:
     #- name: Test with pytest
       #run: |
        # pytest
-    - name: run uvicorn server
-      run: |
-        uvicorn main:app --reload
+    #- name: run uvicorn server
+    #  run: |
+     #   uvicorn main:app --reload
