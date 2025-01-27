@@ -1,6 +1,6 @@
-#POST http://127.0.0.1:8000/items?item=banana
+POST http://127.0.0.1:8000/items?item=banana
 
-GET  http://127.0.0.1:8000/items
+#GET  http://127.0.0.1:8000/items
 
 #DELETE http://127.0.0.1:8000/items/1
 
