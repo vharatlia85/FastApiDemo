@@ -3,47 +3,58 @@ from typing import List
 
 
 app = FastAPI()
+# list of fruits
+fruits = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew"]
 
-items = ["key","lock", "banana", "cherry","oats","poha"]
+#Get root
+@app.get("/")
+def root():
+    return {"Message": "Hello World"}
 
-#Get operation
-@app.get("/items/{item_id}")
-def read_item(item_id: int):
-    if item_id < 0 or item_id >= len(items):
-        raise HTTPException(status_code=404, detail="Item not found")
-    return {"item": items[item_id]}
+#get all fruits
+@app.get("/fruits")
+def get_fruits():
+    return {"fruits":fruits}
 
-@app.get("/items")
-def read_all_items():
-    return {"items": items}
-#post operation
-@app.post("/items")
-def add_item(item:str):
-    items.append(item)
-    return {"message": "Item added successfully", "items": items}
+#get fruit by id
+@app.get("/fruits/{fruit_id}")
+def get_fruit(fruit_id: int):
+    try:
+        return {"fruit":fruits[fruit_id]}
+    except:
+        raise HTTPException(status_code=404, detail="Fruit not found")
+    
+#Add fruit
+@app.post("/fruits")
+def add_fruit(fruit: str):
+    fruits.append(fruit)
+    return {"fruits":fruits}
 
-@app.post("/items/{item_id}")
-def add_item_byId(item_id:int,item:str):
-    items.insert(item_id,item)
-    return {"message": "Item added successfully", "items": items}
-#delete operation
-@app.delete("/items/{item_id}")
-def delete_item(item_id: int):
-    if item_id < 0 or item_id >= len(items):
-        raise HTTPException(status_code=404, detail="Item not found")
-    removed_item = items.pop(item_id)
-    return {"message": f"Item '{removed_item}' deleted successfully", "items": items}
+#insert fruit on specific index
+@app.post("/fruits/{fruit_id}")
+def insert_fruit(fruit_id: int, fruit: str):
+    try:
+        fruits.insert(fruit_id, fruit)
+        return {"fruits":fruits}
+    except:
+        raise HTTPException(status_code=404, detail="Fruit not found")
+    
+#Delete fruit 
+@app.delete("/fruits/{fruit_id}")
+def delete_fruit(fruit_id: int):
+    try:
+        fruits.pop(fruit_id)
+        return {"fruits":fruits}
+    except:
+        raise HTTPException(status_code=404, detail="Fruit not found")
+    
+   
+#update fruit 
+@app.put("/fruits/{fruit_id}")
+def update_fruit(fruit_id: int, fruit: str):
+    try:
+        fruits[fruit_id] = fruit
+        return {"fruits":fruits}
+    except:
+        raise HTTPException(status_code=404, detail="Fruit not found")
 
-@app.delete("/items/")
-def delete_item_byName(item_name: str):
-    if item_name not in items:
-        raise HTTPException(status_code=404, detail="Item not found")
-    items.remove(item_name)
-    return {"message": f"Item '{item_name}' deleted successfully", "items": items}
-# put operation
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: str):
-    if item_id < 0 or item_id >= len(items):
-        raise HTTPException(status_code=404, detail="Item not found")
-    items[item_id] = item
-    return {"message": "Item updated successfully", "items": items}
