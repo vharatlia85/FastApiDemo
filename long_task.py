@@ -9,7 +9,9 @@ tasks = {}
 
 async def long_task(task_id: str):
     # Simulate a long-running task
-    await asyncio.sleep(30)
+    for i in range(1, 100):
+      await asyncio.sleep(1)
+      print(f"Task {task_id}: working on step {i}")
     tasks[task_id] = "completed"
 
 @app.put("/long_task", status_code=202)
