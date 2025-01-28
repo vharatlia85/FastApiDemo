@@ -1,8 +1,8 @@
 from fastapi import FastAPI,HTTPException,BackgroundTasks
 from typing import List
 from celery.result import AsyncResult
-import celery_app
-from celery_app import long_task  # Adjust import based on your project structure
+import celery_config
+from celery_config import long_task  # Adjust import based on your project structure
 from fruitDB import fruits
 
 app = FastAPI()
