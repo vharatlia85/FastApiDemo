@@ -4,7 +4,7 @@
 
 
 #POST http://127.0.0.1:8000/fruits?fruit=pineapple
-#POST http://127.0.0.1:8000/fruits/3?fruit=Mango
+POST http://127.0.0.1:8000/fruits/1?fruit=Mango
 
 #DELETE http://127.0.0.1:8000/fruits/3
 #PUT  http://127.0.0.1:8000/fruits/1?fruit=Orange
